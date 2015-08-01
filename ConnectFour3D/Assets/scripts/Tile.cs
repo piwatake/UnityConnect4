@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;   
 
 public class Tile : MonoBehaviour {
 	
@@ -37,67 +38,77 @@ public class Tile : MonoBehaviour {
 	
 	void OnMouseDown() {
 
+		if (GameManager.instance.EndGame != true) {
+
+			
+
+			if (this.player == 0 && isValidMove ()) {
+
+				if (GameManager.instance.currentPlayerIndex == 0) {
+					player = 1;
+				} else if (GameManager.instance.currentPlayerIndex == 1) {
+					player = 2;
+				}
+
+				if (this.player == 1) {
+					GameManager.instance.playeronepieces.Add (this);
+				} else {
+					GameManager.instance.playertwopieces.Add (this);
+					
+				}
 
 
-		if (this.player == 0 && isValidMove()) {
-
-			if (GameManager.instance.currentPlayerIndex == 0) {
-				player = 1;
-			} else if (GameManager.instance.currentPlayerIndex == 1) {
-				player = 2;
-			}
-
-			if (this.player == 1) {
-				GameManager.instance.playeronepieces.Add (this);
-			} else {
-				GameManager.instance.playertwopieces.Add (this);
-				
-			}
 
 
-
-
-			//check for win condition for next turn handoff. 
-				if(this.player == 1){
-					foreach(Tile t in GameManager.instance.playeronepieces){
-						if(checkIfWin(t, 1)){
-							Debug.Log ("PLAYER ONE IS A WINNER!11!!2!");
-							GameObject.Find("Text").GetComponent<CanvasGroup>().alpha = 1;
-							GameObject.Find("levelText").GetComponent<CanvasGroup>().alpha = 0;
+				//check for win condition for next turn handoff. 
+				if (this.player == 1) {
+					foreach (Tile t in GameManager.instance.playeronepieces) {
+						if (checkIfWin (t, 1)) {
+							//Debug.Log ("PLAYER ONE IS A WINNER!11!!2!");
+							GameManager.instance.EndGame = true;
+							Text winText;
+							winText = GameObject.Find ("Text").GetComponent<Text> ();
+							winText.text = "PLAYER RED IS A WINNER!11!!2!";
+							GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 1;
+							GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 0;
 							break;
 						}
 					}
 
 				} else {
-				Debug.Log("else...");
+					Debug.Log ("else...");
 
-				foreach(Tile t in GameManager.instance.playertwopieces){
-					if(checkIfWin(t, 2)){
-						Debug.Log ("PLAYER TWO IS A WINNER!11!!2!");
-						GameObject.Find("Text").GetComponent<CanvasGroup>().alpha = 1;
-						GameObject.Find("levelText").GetComponent<CanvasGroup>().alpha = 0;
-						break;
+					foreach (Tile t in GameManager.instance.playertwopieces) {
+						if (checkIfWin (t, 2)) {
+							//Debug.Log ("PLAYER TWO IS A WINNER!11!!2!");
+							GameManager.instance.EndGame = true;
+							Text winText;
+							winText = GameObject.Find ("Text").GetComponent<Text> ();
+							winText.text = "PLAYER BLACK IS A WINNER!11!!2!";
+							GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 1;
+							GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 0;
+							break;
+						}
 					}
+
 				}
+
+
+
+				GameManager.instance.doTurn ();
 
 			}
 
 
 
-			GameManager.instance.doTurn();
+
+
+
+
+			Debug.Log (GameManager.instance.currentPlayerIndex + " " + this.gridPosition.x + ", " + this.gridPosition.y);
+
 
 		}
-
-
-
-
-
-
-
-		Debug.Log (GameManager.instance.currentPlayerIndex+" "+this.gridPosition.x+", "+this.gridPosition.y);
-
-
-
 
 	}
 

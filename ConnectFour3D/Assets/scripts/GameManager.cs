@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public List <Tile> playertwopieces = new List<Tile>();
 	List <Player> players = new List<Player>();
 	public int currentPlayerIndex = 0;
+	public bool EndGame = false;
 	private Text levelText;
 	
 	void Awake() {
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour {
 		for (int i = 0; i < cols; i++) {
 			List <Tile> row = new List<Tile>();
 			for (int j = 0; j < rows; j++) {
-				Tile tile = ((GameObject)Instantiate(TilePrefab, new Vector3(i - Mathf.Floor(cols/2),0, -j + Mathf.Floor(rows/2)), Quaternion.Euler(new Vector3()))).GetComponent<Tile>();
+				Tile tile = ((GameObject)Instantiate(TilePrefab, new Vector3(i - Mathf.Floor(cols/2), -j + Mathf.Floor(rows/2), 0 ), Quaternion.Euler(new Vector3()))).GetComponent<Tile>();
 				tile.gridPosition = new Vector2(i, j);
 				row.Add (tile);
 			}
