@@ -70,13 +70,20 @@ public class Tile : MonoBehaviour {
 							winText = GameObject.Find ("Text").GetComponent<Text> ();
 							winText.text = "PLAYER RED IS A WINNER!11!!2!";
 							GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 1;
+
+							GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().alpha = 1;
+							//GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().interactable = true;
+
 							GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 0;
+
+							GameManager.instance.EndGame = true;
+
 							break;
 						}
 					}
 
-				} else {
-					Debug.Log ("else...");
+				} else if (this.player == 0){
+					//Debug.Log ("else...");
 
 					foreach (Tile t in GameManager.instance.playertwopieces) {
 						if (checkIfWin (t, 2)) {
@@ -86,7 +93,12 @@ public class Tile : MonoBehaviour {
 							winText = GameObject.Find ("Text").GetComponent<Text> ();
 							winText.text = "PLAYER BLACK IS A WINNER!11!!2!";
 							GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 1;
+							GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().alpha = 1;
+							//GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().interactable = true;
 							GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 0;
+
+							GameManager.instance.EndGame = true;
+
 							break;
 						}
 					}
@@ -105,7 +117,7 @@ public class Tile : MonoBehaviour {
 
 
 
-			Debug.Log (GameManager.instance.currentPlayerIndex + " " + this.gridPosition.x + ", " + this.gridPosition.y);
+			//Debug.Log (GameManager.instance.currentPlayerIndex + " " + this.gridPosition.x + ", " + this.gridPosition.y);
 
 
 		}
@@ -270,7 +282,7 @@ public class Tile : MonoBehaviour {
 			temp.x = temp.x + 1;
 			
 			
-			
+
 		}
 		
 		return false;
@@ -288,5 +300,7 @@ public class Tile : MonoBehaviour {
 	}
 
 
+	
+	
 	
 }

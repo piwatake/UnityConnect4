@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;      
 
 public class GameManager : MonoBehaviour {
-	public static GameManager instance;
+	public static GameManager instance = null;
 	
 	public GameObject TilePrefab;
 	public GameObject UserPlayerPrefab;
@@ -22,14 +22,12 @@ public class GameManager : MonoBehaviour {
 	private Text levelText;
 	
 	void Awake() {
-		instance = this;
+		initGame ();
 	}
 	
 	// Use this for initialization
 	void Start () {		
-		generateMap();
-		generatePlayers();
-		levelText = GameObject.Find("levelText").GetComponent<Text>();
+
 
 	}
 	
@@ -91,6 +89,42 @@ public class GameManager : MonoBehaviour {
 		
 
 		
+
+	}
+
+	public void initGame(){
+		//Application.LoadLevel(0);
+
+		this.map = null;
+
+		
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(gameObject);
+		}
+
+		GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().alpha = 0;
+		//GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().interactable = true;
+		GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 1;
+
+		currentPlayerIndex = 0;
+
+		
+		//Application.LoadLevel ("gameScene");
+		//DontDestroyOnLoad (gameObject);
+
+		generateMap();
+		generatePlayers();
+		levelText = GameObject.Find("levelText").GetComponent<Text>();
+		EndGame = false;
+	}
+
+
+	public void quit(){
+		Debug.Log ("Quit!");
+		Application.Quit();
 
 	}
 }
