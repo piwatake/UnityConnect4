@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 	public int currentPlayerIndex = 0;
 	public bool EndGame = false;
 	private Text levelText;
+
+	public AudioClip winsound;
 	
 	void Awake() {
 		initGame ();

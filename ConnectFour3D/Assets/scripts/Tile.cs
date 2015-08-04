@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour {
 	
 	public Vector2 gridPosition = Vector2.zero;
 	public int player = 0;
+	public AudioClip buttonpress;
 
 	
 	// Use this for initialization
@@ -38,6 +39,8 @@ public class Tile : MonoBehaviour {
 	
 	void OnMouseDown() {
 
+		SoundManager.instance.PlaySingle (buttonpress);
+
 		if (GameManager.instance.EndGame != true) {
 
 			
@@ -66,6 +69,7 @@ public class Tile : MonoBehaviour {
 						if (checkIfWin (t, 1)) {
 							//Debug.Log ("PLAYER ONE IS A WINNER!11!!2!");
 							GameManager.instance.EndGame = true;
+							SoundManager.instance.PlaySingle(GameManager.instance.winsound);
 							Text winText;
 							winText = GameObject.Find ("Text").GetComponent<Text> ();
 							winText.text = "PLAYER RED IS A WINNER!11!!2!";
@@ -76,19 +80,20 @@ public class Tile : MonoBehaviour {
 
 							GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 0;
 
-							GameManager.instance.EndGame = true;
+							//GameManager.instance.EndGame = true;
 
 							break;
 						}
 					}
 
-				} else if (this.player == 0){
+				} else {
 					//Debug.Log ("else...");
 
 					foreach (Tile t in GameManager.instance.playertwopieces) {
 						if (checkIfWin (t, 2)) {
 							//Debug.Log ("PLAYER TWO IS A WINNER!11!!2!");
 							GameManager.instance.EndGame = true;
+							SoundManager.instance.PlaySingle(GameManager.instance.winsound);
 							Text winText;
 							winText = GameObject.Find ("Text").GetComponent<Text> ();
 							winText.text = "PLAYER BLACK IS A WINNER!11!!2!";
@@ -97,7 +102,7 @@ public class Tile : MonoBehaviour {
 							//GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().interactable = true;
 							GameObject.Find ("levelText").GetComponent<CanvasGroup> ().alpha = 0;
 
-							GameManager.instance.EndGame = true;
+							//GameManager.instance.EndGame = true;
 
 							break;
 						}
