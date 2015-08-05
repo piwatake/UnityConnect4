@@ -20,19 +20,29 @@ public class Tile : MonoBehaviour {
 	}
 	
 	void OnMouseEnter() {
-		transform.GetComponent<Renderer>().material.color = Color.blue;
+		if (GameManager.instance.EndGame == true) {
+
+		} else {
+			transform.GetComponent<Renderer>().material.color = Color.blue;
+		}
+
 		
 		//Debug.Log("my position is (" + gridPosition.x + "," + gridPosition.y);
 	}
 	
 	void OnMouseExit() {
-		if (player == 1) {
-			transform.GetComponent<Renderer> ().material.color = Color.red;
-		} else if (player == 2) {
-			transform.GetComponent<Renderer> ().material.color = Color.black;
+		if (GameManager.instance.EndGame == true) {
+			
 		} else {
-			transform.GetComponent<Renderer>().material.color = Color.white;
+			if (player == 1) {
+				transform.GetComponent<Renderer> ().material.color = Color.red;
+			} else if (player == 2) {
+				transform.GetComponent<Renderer> ().material.color = Color.black;
+			} else {
+				transform.GetComponent<Renderer>().material.color = Color.white;
+			}
 		}
+
 
 	}
 	
@@ -164,11 +174,14 @@ public class Tile : MonoBehaviour {
 
 			//first one guaranteed.
 			int four = 1;
+			Tile[] mytiles = new Tile[4];
+			mytiles[0] = space;
 			while(onBoard(temp)){
 
 
 			if(this.player == playerparam){
 				if(GameManager.instance.map[(int)temp.x][(int)temp.y].player == playerparam ){
+					mytiles[four] = GameManager.instance.map[(int)temp.x][(int)temp.y];
 					four++;
 				} else {
 					break;
@@ -177,6 +190,7 @@ public class Tile : MonoBehaviour {
 
 
 				if(four == 4){
+					StartCoroutine(highlightConnectedFour(mytiles, 0.4f));
 					return true;
 				}
 
@@ -199,11 +213,14 @@ public class Tile : MonoBehaviour {
 		
 		//first one guaranteed.
 		int four = 1;
+		Tile[] mytiles = new Tile[4];
+		mytiles[0] = space;
 		while(onBoard(temp)){
 			
 			
 			if(this.player == playerparam){
 				if(GameManager.instance.map[(int)temp.x][(int)temp.y].player == playerparam ){
+					mytiles[four] = GameManager.instance.map[(int)temp.x][(int)temp.y];
 					four++;
 				} else {
 					break;
@@ -212,6 +229,7 @@ public class Tile : MonoBehaviour {
 			
 			
 			if(four == 4){
+				StartCoroutine(highlightConnectedFour(mytiles, 0.4f));
 				return true;
 			}
 			
@@ -234,11 +252,14 @@ public class Tile : MonoBehaviour {
 		
 		//first one guaranteed.
 		int four = 1;
+		Tile[] mytiles = new Tile[4];
+		mytiles[0] = space;
 		while(onBoard(temp)){
 			
 			
 			if(this.player == playerparam){
 				if(GameManager.instance.map[(int)temp.x][(int)temp.y].player == playerparam ){
+					mytiles[four] = GameManager.instance.map[(int)temp.x][(int)temp.y];
 					four++;
 				} else {
 					break;
@@ -247,6 +268,7 @@ public class Tile : MonoBehaviour {
 			
 			
 			if(four == 4){
+				StartCoroutine(highlightConnectedFour(mytiles, 0.4f));
 				return true;
 			}
 
@@ -268,11 +290,14 @@ public class Tile : MonoBehaviour {
 		
 		//first one guaranteed.
 		int four = 1;
+        Tile[] mytiles = new Tile[4];
+        mytiles[0] = space;
 		while(onBoard(temp)){
 			
 			
 			if(this.player == playerparam){
 				if(GameManager.instance.map[(int)temp.x][(int)temp.y].player == playerparam ){
+                    mytiles[four] = GameManager.instance.map[(int)temp.x][(int)temp.y];
 					four++;
 				} else {
 					break;
@@ -281,6 +306,7 @@ public class Tile : MonoBehaviour {
 			
 			
 			if(four == 4){
+				StartCoroutine(highlightConnectedFour(mytiles, 0.5f));
 				return true;
 			}
 			
@@ -304,6 +330,33 @@ public class Tile : MonoBehaviour {
 
 	}
 
+
+    IEnumerator highlightConnectedFour(Tile[] row, float rate)
+    {
+
+		Color toset = new Color (0.164f, 0.670f, 0.164f, 1);
+
+		while (true) {
+			Color temp;
+			foreach (Tile t in row)
+			{
+				temp = t.transform.GetComponent<Renderer> ().material.color;
+				if(t.player == 1 || t.player == 2){
+					t.transform.GetComponent<Renderer> ().material.color = toset;
+				}
+				if(temp == toset && t.player == 1){
+					t.transform.GetComponent<Renderer> ().material.color = Color.red;
+				}
+				if(temp == toset && t.player == 2){
+					t.transform.GetComponent<Renderer> ().material.color = Color.black;
+				}
+			}
+
+			yield return new WaitForSeconds(rate);
+		}
+
+
+    }
 
 	
 	
