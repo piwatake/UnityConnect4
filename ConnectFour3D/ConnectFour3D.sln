@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7B0B00D1-07C8-E12D-6F56-952B52D8E60A}"
+# Visual Studio 2008
+
+Project("{A9EDDA30-548F-FFBA-D95B-F233B093B134}") = "ConnectFour3D", "Assembly-CSharp.csproj", "{7B0B00D1-07C8-E12D-6F56-952B52D8E60A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,7 +14,10 @@ Global
 		{7B0B00D1-07C8-E12D-6F56-952B52D8E60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B0B00D1-07C8-E12D-6F56-952B52D8E60A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+					GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -164,7 +167,5 @@ Global
 		$0.VersionControlPolicy = $28
 		$28.inheritsSet = Mono
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
+
 EndGlobal

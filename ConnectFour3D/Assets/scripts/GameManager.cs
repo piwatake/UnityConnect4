@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour {
 			levelText.text = "Red's Turn";
 			levelText.color = Color.red;
 		} else if (currentPlayerIndex == 1 ) {
-			levelText.text = "Black's Turn";
-			levelText.color = Color.black;
+			levelText.text = "Blue's Turn";
+			levelText.color = new Color(.00784f,.07059f,.38421f,1);
 		}
 	}
 
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour {
 
 
 	public void quit(){
-		Debug.Log ("Quit!");
+		//Debug.Log ("Quit!");
 		Application.Quit();
 
 	}

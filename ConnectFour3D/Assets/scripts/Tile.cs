@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour {
 	public Vector2 gridPosition = Vector2.zero;
 	public int player = 0;
 	public AudioClip buttonpress;
+	Color32 myblue = new Color32(2,18,98,1);
 
 	
 	// Use this for initialization
@@ -23,7 +24,7 @@ public class Tile : MonoBehaviour {
 		if (GameManager.instance.EndGame == true) {
 
 		} else {
-			transform.GetComponent<Renderer>().material.color = Color.blue;
+			transform.GetComponent<Renderer>().material.color = new Color32(246, 208, 85, 1);
 		}
 
 		
@@ -37,7 +38,7 @@ public class Tile : MonoBehaviour {
 			if (player == 1) {
 				transform.GetComponent<Renderer> ().material.color = Color.red;
 			} else if (player == 2) {
-				transform.GetComponent<Renderer> ().material.color = Color.black;
+				transform.GetComponent<Renderer> ().material.color = myblue;
 			} else {
 				transform.GetComponent<Renderer>().material.color = Color.white;
 			}
@@ -82,7 +83,7 @@ public class Tile : MonoBehaviour {
 							SoundManager.instance.PlaySingle(GameManager.instance.winsound);
 							Text winText;
 							winText = GameObject.Find ("Text").GetComponent<Text> ();
-							winText.text = "PLAYER RED IS A WINNER!11!!2!";
+							winText.text = "PLAYER RED IS A WINNER!!!";
 							GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 1;
 
 							GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().alpha = 1;
@@ -106,7 +107,7 @@ public class Tile : MonoBehaviour {
 							SoundManager.instance.PlaySingle(GameManager.instance.winsound);
 							Text winText;
 							winText = GameObject.Find ("Text").GetComponent<Text> ();
-							winText.text = "PLAYER BLACK IS A WINNER!11!!2!";
+							winText.text = "PLAYER BLUE IS A WINNER!!!";
 							GameObject.Find ("Text").GetComponent<CanvasGroup> ().alpha = 1;
 							GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().alpha = 1;
 							//GameObject.Find ("NGButton").GetComponent<CanvasGroup> ().interactable = true;
@@ -348,7 +349,7 @@ public class Tile : MonoBehaviour {
 					t.transform.GetComponent<Renderer> ().material.color = Color.red;
 				}
 				if(temp == toset && t.player == 2){
-					t.transform.GetComponent<Renderer> ().material.color = Color.black;
+					t.transform.GetComponent<Renderer> ().material.color = myblue;
 				}
 			}
 
